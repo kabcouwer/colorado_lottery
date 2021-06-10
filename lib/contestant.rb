@@ -5,6 +5,7 @@ class Contestant
               :state_of_residence,
               :spending_money,
               :game_interests
+
   def initialize(attributes)
     @first_name = attributes[:first_name]
     @last_name = attributes[:last_name]
@@ -28,5 +29,9 @@ class Contestant
 
   def add_game_interest(game)
     @game_interests << game
-  end  
+  end
+
+  def charge(game)
+    @spending_money -= game.cost
+  end
 end

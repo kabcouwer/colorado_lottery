@@ -4,6 +4,7 @@ require './lib/contestant'
 
 RSpec.describe Contestant do
   before :each do
+    @pick_4 = Game.new('Pick 4', 2)
     @alexander = Contestant.new({
                                   first_name: 'Alexander',
                                   last_name: 'Aigiades',
@@ -33,6 +34,11 @@ RSpec.describe Contestant do
       @alexander.add_game_interest('Pick 4')
 
       expect(@alexander.game_interests).to eq(['Mega Millions', 'Pick 4'])
+    end
+
+    it 'can charge contestant' do
+      @alexander.charge(@pick_4)
+      expect(@alexander.spending_money).to eq(8)
     end
   end
 end

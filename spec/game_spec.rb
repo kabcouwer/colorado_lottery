@@ -7,6 +7,7 @@ RSpec.describe Game do
     @pick_4 = Game.new('Pick 4', 2)
     @mega_millions = Game.new('Mega Millions', 5, true)
   end
+  
   describe 'instantiation' do
     it 'exists' do
       expect(@pick_4).to be_a(Game)

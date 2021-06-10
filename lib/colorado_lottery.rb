@@ -25,4 +25,37 @@ class ColoradoLottery
       false
     end
   end
+
+  def register_contestant(person, game)
+    person_array = []
+    if can_register?(person, game) == true &&
+      registered_contestants[game.name] == nil
+      registered_contestants[game.name] = person_array
+      person_array << person
+    else
+      can_register?(person, game) == true
+      registered_contestants[game.name] << person
+    end
+  end
+
+  def eligible_contestants(game)
+    registered_contestants[game.name].find_all do |person|
+      person.spending_money >= game.cost
+    end
+  end
+
+  def charge_contestants(game)
+    person_array = []
+    eligible_contestants(game).map do |person|
+      if current_contestants[game] != nil
+        person_array << person.full_name
+        person.charge(game)
+      else
+        current_contestants[game] = person_array
+        person_array << person.full_name
+        person.charge(game)
+      end
+    end
+  end
+
 end
